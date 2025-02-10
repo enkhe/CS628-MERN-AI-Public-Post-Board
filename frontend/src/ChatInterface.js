@@ -5,7 +5,7 @@ function ChatInterface() {
   const [result, setResult] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:3001/api/chat';
+  const apiUrl = process.env.REACT_APP_BACKEND_APP_API_URL || 'http://localhost:3001/api/chat';
 
   // Handle text input change
   const handleTextChange = (e) => {
