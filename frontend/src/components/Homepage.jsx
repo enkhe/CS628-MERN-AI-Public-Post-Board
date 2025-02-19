@@ -6,6 +6,7 @@ import SearchField from './SearchField';
 import PostCard from './PostCard';
 import Grid from '@mui/material/Grid2';
 import Pagination from '@mui/material/Pagination';
+import { NavLink } from 'react-router-dom';
 const NUMBERPOST=15
 function Homepage() {
   const [postList,setPostList]=useState([])
@@ -17,43 +18,43 @@ function Homepage() {
   
   useEffect(()=>{
     setPostList([
-      {title:"sell car",image:"https://www.cars.com/images/sell/sale-dealer-woman.jpg",date:"1 day ago"},
-      {title:"sell car",image:"https://www.cars.com/images/sell/sale-dealer-woman.jpg",date:"1 day ago"},
-      {title:"sell car",image:"https://www.cars.com/images/sell/sale-dealer-woman.jpg",date:"1 day ago"},
-      {title:"sell car",image:"https://www.cars.com/images/sell/sale-dealer-woman.jpg",date:"1 day ago"},
-      {title:"sell car",image:"https://www.cars.com/images/sell/sale-dealer-woman.jpg",date:"1 day ago"},
-      {title:"sell car",image:"https://www.cars.com/images/sell/sale-dealer-woman.jpg",date:"1 day ago"},
-      {title:"sell car",image:"https://www.cars.com/images/sell/sale-dealer-woman.jpg",date:"1 day ago"},
-      {title:"sell car",image:"https://www.cars.com/images/sell/sale-dealer-woman.jpg",date:"1 day ago"},
-      {title:"sell car",image:"https://www.cars.com/images/sell/sale-dealer-woman.jpg",date:"1 day ago"},
-      {title:"sell car",image:"https://www.cars.com/images/sell/sale-dealer-woman.jpg",date:"1 day ago"},
-      {title:"sell car",image:"https://www.cars.com/images/sell/sale-dealer-woman.jpg",date:"1 day ago"},
-      {title:"sell car",image:"https://www.cars.com/images/sell/sale-dealer-woman.jpg",date:"1 day ago"},
-      {title:"sell car",image:"https://www.cars.com/images/sell/sale-dealer-woman.jpg",date:"1 day ago"},
-      {title:"sell car",image:"https://www.cars.com/images/sell/sale-dealer-woman.jpg",date:"1 day ago"},
-      {title:"sell car",image:"https://www.cars.com/images/sell/sale-dealer-woman.jpg",date:"1 day ago"},
-      {title:"sell car",image:"https://www.cars.com/images/sell/sale-dealer-woman.jpg",date:"1 day ago"},
-      {title:"sell car",image:"https://www.cars.com/images/sell/sale-dealer-woman.jpg",date:"1 day ago"},
-      {title:"sell car",image:"https://www.cars.com/images/sell/sale-dealer-woman.jpg",date:"1 day ago"},
-      {title:"sell car",image:"https://www.cars.com/images/sell/sale-dealer-woman.jpg",date:"1 day ago"},
-      {title:"sell car",image:"https://www.cars.com/images/sell/sale-dealer-woman.jpg",date:"1 day ago"},
-      {title:"sell car",image:"https://www.cars.com/images/sell/sale-dealer-woman.jpg",date:"1 day ago"},
-      {title:"sell car",image:"https://www.cars.com/images/sell/sale-dealer-woman.jpg",date:"1 day ago"},
-      {title:"sell car",image:"https://www.cars.com/images/sell/sale-dealer-woman.jpg",date:"1 day ago"},
-      {title:"sell car",image:"https://www.cars.com/images/sell/sale-dealer-woman.jpg",date:"1 day ago"},
-      {title:"sell car",image:"https://www.cars.com/images/sell/sale-dealer-woman.jpg",date:"1 day ago"},
-      {title:"sell car",image:"https://www.cars.com/images/sell/sale-dealer-woman.jpg",date:"1 day ago"},
-      {title:"sell car",image:"https://www.cars.com/images/sell/sale-dealer-woman.jpg",date:"1 day ago"},
-      {title:"sell car",image:"https://www.cars.com/images/sell/sale-dealer-woman.jpg",date:"1 day ago"},
-      {title:"sell car",image:"https://www.cars.com/images/sell/sale-dealer-woman.jpg",date:"1 day ago"},
-      {title:"sell car",image:"https://www.cars.com/images/sell/sale-dealer-woman.jpg",date:"1 day ago"},
-      {title:"sell car",image:"https://www.cars.com/images/sell/sale-dealer-woman.jpg",date:"1 day ago"},
-      {title:"sell car",image:"https://www.cars.com/images/sell/sale-dealer-woman.jpg",date:"1 day ago"},
-      {title:"sell car",image:"https://www.cars.com/images/sell/sale-dealer-woman.jpg",date:"1 day ago"},
-      {title:"sell car",image:"https://www.cars.com/images/sell/sale-dealer-woman.jpg",date:"1 day ago"},
-      {title:"sell car",image:"https://www.cars.com/images/sell/sale-dealer-woman.jpg",date:"1 day ago"},
-      {title:"sell car",image:"https://www.cars.com/images/sell/sale-dealer-woman.jpg",date:"1 day ago"},
-      {title:"sell car",image:"https://www.cars.com/images/sell/sale-dealer-woman.jpg",date:"1 day ago"}
+      {id:"1",title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
+      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
+      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
+      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
+      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
+      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
+      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
+      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
+      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
+      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
+      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
+      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
+      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
+      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
+      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
+      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
+      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
+      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
+      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
+      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
+      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
+      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
+      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
+      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
+      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
+      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
+      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
+      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
+      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
+      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
+      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
+      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
+      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
+      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
+      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
+      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
+      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"}
     ])
   },[])
   return (
@@ -67,27 +68,31 @@ function Homepage() {
       }}>
         <Box sx={{ width: "100px" }} />
         <SearchField />
-        <Button variant="contained" endIcon={<PostAddIcon />} size="large">
-          Make Post
-        </Button>
+        <NavLink to="/createpost" style={{textDecoration:"none"}}>
+          <Button variant="contained" endIcon={<PostAddIcon />} size="large">
+            Make Post
+          </Button>
+        </NavLink>
+        
       </Box>
       <Grid 
-  container 
-  spacing={2} 
-  
-  sx={{ 
-   mt: 5,
-  width: "90%",
-  ml: "auto",
-  mr: "auto"
-   }}
->
+          container 
+          spacing={2} 
+          
+          sx={{ 
+          mt: 5,
+          width: "90%",
+          ml: "auto",
+          mr: "auto"
+          }}
+      >
   {postList.slice((currentPage-1)*NUMBERPOST,currentPage*NUMBERPOST).map((item) => (
     <Grid 
       item 
       size={2.4}  // 12 ÷ 5 = 2.4 to get exactly 5 items per row
       key={item.id}
     >
+      <NavLink to={`/postdetail/${item.id}`} style={{textDecoration:"none"}}>
       <Box
         sx={{
           border: '1px solidrgb(103, 91, 91)',
@@ -101,17 +106,19 @@ function Homepage() {
         }}
       >
         <PostCard 
-          image={item.image} 
+          image={item.images?.[0]} 
           title={item.title} 
           date={item.date}
         />
       </Box>
+      </NavLink>
+      
     </Grid>
   ))}
-</Grid>
-<Box display="flex" justifyContent="center" alignItems="center" marginTop={2} marginBottom={10}>
-      <Pagination count={Math.ceil(postList.length/NUMBERPOST)} color="primary" onChange={handlePageChange}/>
-    </Box>
+      </Grid>
+      <Box display="flex" justifyContent="center" alignItems="center" marginTop={2} marginBottom={10}>
+        <Pagination count={Math.ceil(postList.length/NUMBERPOST)} color="primary" onChange={handlePageChange}/>
+      </Box>
     </div>
   );
 }
