@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useContext } from 'react';
 import PostAddIcon from '@mui/icons-material/PostAdd';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -7,56 +7,32 @@ import PostCard from './PostCard';
 import Grid from '@mui/material/Grid2';
 import Pagination from '@mui/material/Pagination';
 import { NavLink } from 'react-router-dom';
-const NUMBERPOST=15
+import { getPostList } from '../services/postService';
+import PostContext from '../context/PostContext';
+
+const NUMBERPOST = 15;
+
 function Homepage() {
-  const [postList,setPostList]=useState([])
-  
-  const [currentPage,setCurrentPage]=useState(1)
-  const handlePageChange=(_,value)=>{
-      setCurrentPage(value)
-  }
-  
-  useEffect(()=>{
-    setPostList([
-      {id:"1",title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
-      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
-      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
-      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
-      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
-      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
-      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
-      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
-      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
-      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
-      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
-      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
-      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
-      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
-      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
-      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
-      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
-      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
-      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
-      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
-      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
-      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
-      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
-      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
-      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
-      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
-      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
-      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
-      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
-      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
-      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
-      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
-      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
-      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
-      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
-      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"},
-      {title:"sell car",images:["https://www.cars.com/images/sell/sale-dealer-woman.jpg"],date:"1 day ago"}
-    ])
-  },[])
+  const { state, dispatch } = useContext(PostContext);
+  const { posts } = state;
+
+  const handlePageChange = (_, value) => {
+    // Handle page change logic here
+  };
+
+  useEffect(() => {
+    const fetchPostList = async () => {
+      try {
+        const data = await getPostList();
+        dispatch({ type: 'SET_POSTS', payload: data });
+      } catch (error) {
+        console.error('Failed to fetch post list:', error);
+      }
+    };
+
+    fetchPostList();
+  }, [dispatch]);
+
   return (
     <div>
       <Box sx={{
@@ -68,58 +44,56 @@ function Homepage() {
       }}>
         <Box sx={{ width: "100px" }} />
         <SearchField />
-        <NavLink to="/createpost" style={{textDecoration:"none"}}>
+        <NavLink to="/createpost" style={{ textDecoration: "none" }}>
           <Button variant="contained" endIcon={<PostAddIcon />} size="large">
             Make Post
           </Button>
         </NavLink>
-        
       </Box>
-      <Grid 
-          container 
-          spacing={2} 
-          
-          sx={{ 
+      <Grid
+        container
+        spacing={2}
+        sx={{
           mt: 5,
           width: "90%",
           ml: "auto",
           mr: "auto"
-          }}
-      >
-  {postList.slice((currentPage-1)*NUMBERPOST,currentPage*NUMBERPOST).map((item) => (
-    <Grid 
-      item 
-      size={2.4}  // 12 ÷ 5 = 2.4 to get exactly 5 items per row
-      key={item.id}
-    >
-      <NavLink to={`/postdetail/${item.id}`} style={{textDecoration:"none"}}>
-      <Box
-        sx={{
-          border: '1px solidrgb(103, 91, 91)',
-          borderRadius: '8px',
-          
-          boxShadow: '0 2px 4px rgba(0,0,0,0.05)',
-          '&:hover': {
-            boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
-            borderColor: '#bdbdbd'
-          }
         }}
       >
-        <PostCard 
-          image={item.images?.[0]} 
-          title={item.title} 
-          date={item.date}
-        />
-      </Box>
-      </NavLink>
-      
-    </Grid>
-  ))}
+        {posts.slice(0, NUMBERPOST).map((item) => (
+          <Grid
+            item
+            size={2.4}  // 12 ÷ 5 = 2.4 to get exactly 5 items per row
+            key={item.id}
+          >
+            <NavLink to={`/postdetail/${item.id}`} style={{ textDecoration: "none" }}>
+              <Box
+                sx={{
+                  border: '1px solid rgb(103, 91, 91)',
+                  borderRadius: '8px',
+                  boxShadow: '0 2px 4px rgba(0,0,0,0.05)',
+                  '&:hover': {
+                    boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
+                    borderColor: '#bdbdbd'
+                  }
+                }}
+              >
+                <PostCard
+                  image={item.images?.[0]}
+                  title={item.title}
+                  date={item.date}
+                  content={item.content}
+                />
+              </Box>
+            </NavLink>
+          </Grid>
+        ))}
       </Grid>
       <Box display="flex" justifyContent="center" alignItems="center" marginTop={2} marginBottom={10}>
-        <Pagination count={Math.ceil(postList.length/NUMBERPOST)} color="primary" onChange={handlePageChange}/>
+        <Pagination count={Math.ceil(posts.length / NUMBERPOST)} color="primary" onChange={handlePageChange} />
       </Box>
     </div>
   );
 }
-export default Homepage
+
+export default Homepage;

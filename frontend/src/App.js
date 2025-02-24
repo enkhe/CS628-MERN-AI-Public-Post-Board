@@ -1,26 +1,28 @@
-
+import React from 'react';
 import './App.css';
 import Header from './components/Header';
 import Homepage from './components/Homepage';
-import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom'; // import NavLink
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import PostDetail from './components/PostDetail';
 import CreatePost from './components/CreatePost';
+import { PostProvider } from './context/PostContext';
+
 function App() {
   return (
-    <BrowserRouter>
-      <div className="App">
-        <Header/>
-          <div> 
+    <PostProvider>
+      <Router>
+        <div className="App">
+          <Header />
+          <div>
             <Routes>
-              <Route path="/" element={<Homepage/>}/>
-              <Route path="/postdetail/:id" element={<PostDetail/>}/>
-              <Route path="/createpost" element={<CreatePost/>}/>
+              <Route path="/" element={<Homepage />} />
+              <Route path="/postdetail/:id" element={<PostDetail />} />
+              <Route path="/createpost" element={<CreatePost />} />
             </Routes>
           </div>
-        
-      </div>
-    </BrowserRouter>
-    
+        </div>
+      </Router>
+    </PostProvider>
   );
 }
 
