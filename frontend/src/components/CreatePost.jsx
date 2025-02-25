@@ -6,7 +6,6 @@ function CreatePost() {
   const [title, setTitle] = useState('');
   const [details, setDetails] = useState('');
   const [images, setImages] = useState('');
-  const [date, setDate] = useState('');
   const [contact, setContact] = useState('');
 
   const handleSubmit = async (event) => {
@@ -15,16 +14,21 @@ function CreatePost() {
       title,
       content: details,
       images: images.split(',').map(img => img.trim()),
-      date,
       contact
     };
     try {
       await createPost(newPost);
       alert('Post created successfully!');
+      setTitle('');
+      setDetails('');
+      setImages('');
+      setContact('');
+    
     } catch (error) {
       console.error('Failed to create post:', error);
       alert('Failed to create post.');
     }
+
   };
 
   return (
@@ -72,14 +76,7 @@ function CreatePost() {
               value={images}
               onChange={(e) => setImages(e.target.value)}
             />
-            <TextField
-              label="Date"
-              variant="outlined"
-              fullWidth
-              margin="normal"
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
-            />
+            
             <TextField
               label="Contact Information"
               variant="outlined"
@@ -88,7 +85,7 @@ function CreatePost() {
               value={contact}
               onChange={(e) => setContact(e.target.value)}
             />
-            <Button type="submit" variant="contained" color="primary" fullWidth>
+            <Button type="submit" variant="contained" color="primary" fullWidth >
               Create Post
             </Button>
           </form>

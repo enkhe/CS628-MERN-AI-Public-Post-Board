@@ -16,9 +16,6 @@ function Homepage() {
   const { state, dispatch } = useContext(PostContext);
   const { posts } = state;
 
-  const handlePageChange = (_, value) => {
-    // Handle page change logic here
-  };
 
   useEffect(() => {
     const fetchPostList = async () => {
@@ -64,9 +61,9 @@ function Homepage() {
           <Grid
             item
             size={2.4}  // 12 ÷ 5 = 2.4 to get exactly 5 items per row
-            key={item.id}
+            key={item._id}
           >
-            <NavLink to={`/postdetail/${item.id}`} style={{ textDecoration: "none" }}>
+            <NavLink to={`/postdetail/${item._id}`} style={{ textDecoration: "none" }}>
               <Box
                 sx={{
                   border: '1px solid rgb(103, 91, 91)',
@@ -81,7 +78,7 @@ function Homepage() {
                 <PostCard
                   image={item.images?.[0]}
                   title={item.title}
-                  date={item.date}
+                  createdAt={item.createdAt}
                   content={item.content}
                 />
               </Box>
@@ -90,7 +87,7 @@ function Homepage() {
         ))}
       </Grid>
       <Box display="flex" justifyContent="center" alignItems="center" marginTop={2} marginBottom={10}>
-        <Pagination count={Math.ceil(posts.length / NUMBERPOST)} color="primary" onChange={handlePageChange} />
+        <Pagination count={Math.ceil(posts.length / NUMBERPOST)} color="primary" />
       </Box>
     </div>
   );

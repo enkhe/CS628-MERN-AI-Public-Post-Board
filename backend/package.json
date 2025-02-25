@@ -4,7 +4,7 @@
   "description": "Backend server for the app",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_OPTIONS=--openssl-legacy-provider PORT=3001 node server.js",
+    "start": "cross-env NODE_OPTIONS=--openssl-legacy-provider PORT=3001 node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -17,5 +17,8 @@
     "express": "^4.21.2",
     "mongoose": "^8.10.1",
     "uuid": "^11.1.0"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3"
   }
 }

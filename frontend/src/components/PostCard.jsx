@@ -5,13 +5,14 @@ import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
+import daysAgo from '../utils';
 
-export default function PostCard({ image, date, title, content }) {
+export default function PostCard({ image, createdAt, title, content }) {
   return (
     <Card sx={{ maxWidth: 345, border: "outset" }}>
       <CardHeader
         title={title}
-        subheader={date}
+        subheader={daysAgo(createdAt)}
       />
       <CardMedia
         component="img"
@@ -21,7 +22,7 @@ export default function PostCard({ image, date, title, content }) {
       />
       <CardContent>
         <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-          {content}
+          {content.slice(0,100)}...
         </Typography>
       </CardContent>
     </Card>

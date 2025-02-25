@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import ImageSlide from './ImageSlide';
 import { getPostDetail } from '../services/postService';
+import { formatDate } from '../utils';
 
 function PostDetail() {
   const { id } = useParams();
@@ -39,7 +40,7 @@ function PostDetail() {
         textAlign: "left"
       }}>
         <h1>{postDetail.title}</h1>
-        <h5>{postDetail.date}</h5>
+        <h5>{formatDate(postDetail.createdAt)}</h5>
         <div>
           <p>{postDetail.content}</p>
         </div>
