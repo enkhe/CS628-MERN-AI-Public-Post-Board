@@ -1,28 +1,44 @@
-const posts = require('../data/postsData');
+const Post = require('../models/Post'); // Import MongoDB model
 
-exports.getPosts = (req, res) => {
-  res.json(posts);
+// (GET /api/posts)
+exports.getPosts = async (req, res) => {
+    try {
+        const posts = await Post.find(); // view every posts from MongoDB
+        res.json(posts);
+    } catch (error) {
+        res.status(500).json({ error: 'Server Error' });
+    }
 };
 
-exports.getPostById = (req, res) => {
-  const post = posts.find(p => p.id === req.params.id);
-  if (post) {
-    res.json(post);
-  } else {
-    res.status(404).json({ error: 'Post not found' });
-  }
+// (GET /api/posts/:id)
+exports.getPostById = async (req, res) => {
+    try {
+        const post = await Post.findById(req.params.id); // view certain post by ID from MongoDB
+        if (post) {
+            res.json(post);
+        } else {
+            res.status(404).json({ error: 'Cannot be found' });
+        }
+    } catch (error) {
+        res.status(500).json({ error: 'Server Error' });
+    }
 };
 
-exports.createPost = (req, res) => {
-  const { title, content, images, date, contact } = req.body;
-  const newPost = {
-    id: require('uuid').v4(), // Generate a unique ID for the new post
-    title,
-    content,
-    images,
-    date,
-    contact
-  };
-  posts.push(newPost);
-  res.status(201).json(newPost);
+// (POST /api/posts)
+exports.createPost = async (req, res) => {
+    try {
+        const { title, content, images, date, contact } = req.body;
+        const newPost = new Post({
+            title,
+            content,
+            images,
+            date,
+            contact
+        });
+
+        await newPost.save(); // Save in MongoDB
+        res.status(201).json(newPost);
+    } catch (error) {
+        res.status(500).json({ error: 'Post Failure' });
+    }
 };

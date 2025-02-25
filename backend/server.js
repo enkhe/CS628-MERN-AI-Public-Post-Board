@@ -4,6 +4,7 @@ require('dotenv').config();
 // Import required modules
 const express = require('express');
 const cors = require('cors');
+const connectDB = require('./db'); // Bring MongoDB connection function from db.js
 const postRoutes = require('./routes/postRoutes');
 const chatRoutes = require('./routes/chatRoutes');
 
@@ -16,6 +17,9 @@ app.use(cors());
 
 // Middleware to parse JSON request bodies
 app.use(express.json());
+
+// Execute MongoDB connection
+connectDB();
 
 // Define a simple route for the root URL
 app.get('/', (req, res) => {
