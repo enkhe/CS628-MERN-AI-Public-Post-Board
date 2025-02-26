@@ -27,12 +27,17 @@ exports.getPostById = async (req, res) => {
 // (POST /api/posts)
 exports.createPost = async (req, res) => {
     try {
-        const { title, content, images, date, contact } = req.body;
+        const { title, content, images, contact } = req.body;
+
+        // input validation
+        if (!title || !content || !images || !contact) {
+            return res.status(400).json({ error: 'All fields are required' });
+        }
+        
         const newPost = new Post({
             title,
             content,
             images,
-            date,
             contact
         });
 
