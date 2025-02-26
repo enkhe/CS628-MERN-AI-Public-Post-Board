@@ -13,7 +13,11 @@ const app = express();
 const port = process.env.PORT || 3001;
 
 // Middleware to enable Cross-Origin Resource Sharing (CORS)
-app.use(cors());
+app.use(cors({
+  origin: "*", // To use certain domain; "https://special-fortnight-4jg94vj4wp76gp-3001.app.github.dev"
+  methods: ["GET", "POST"],
+  allowedHeaders: ["Content-Type"]
+}));
 
 // Middleware to parse JSON request bodies
 app.use(express.json());
