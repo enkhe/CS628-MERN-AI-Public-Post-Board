@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-// const API_URL = 'https://bug-free-space-spork-j9qpg6r5qg2p65q-3001.app.github.dev/api/posts'; // Adjust the URL as needed
-const API_URL = 'http://localhost:3001/api/posts'
+const API_URL = process.env.REACT_APP_API_URL;
+
 export const getPostList = async () => {
   try {
     const response = await axios.get(API_URL);

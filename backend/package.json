@@ -4,7 +4,9 @@
   "description": "Backend server for the app",
   "main": "index.js",
   "scripts": {
-    "start": "cross-env NODE_OPTIONS=--openssl-legacy-provider PORT=3001 node server.js",
+    "prestart": "chmod +x start.sh",
+    "start": "./start.sh",
+    "poststart": "echo 'Running poststart script' && echo $CODESPACE_NAME && gh codespace ports visibility 3001:public -c $CODESPACE_NAME",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
