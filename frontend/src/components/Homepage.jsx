@@ -45,6 +45,13 @@ function Homepage() {
           <Button variant="contained" endIcon={<PostAddIcon />} size="large">
             Make Post
           </Button>
+        
+        </NavLink>
+        <NavLink to="/createpostAI" style={{ textDecoration: "none" }}>
+        
+          <Button variant="contained" endIcon={<PostAddIcon />} size="large">
+            Make Post with AI Chatbot
+          </Button>
         </NavLink>
       </Box>
       <Grid

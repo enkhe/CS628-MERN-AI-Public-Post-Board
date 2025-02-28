@@ -87,32 +87,23 @@ npm install
 # Install frontend dependencies
 cd ../frontend
 npm install
+npm install web-vitals
+npm install cross-env
 ```
 
-3. Create a .env file in the backend directory and add the following environment variables:
-```bash
-PORT=3001
-GEMMA_API_URL_LOCAL=http://localhost:11434/api/generate
-```
-
-4. Set the ports visibility for the backend:
-   ```bash
-   gh codespace ports visibility 3001:public -c $CODESPACE_NAME
-```
-
-5. Start the backend server:
+3. Start the backend server:
 ```bash
 cd backend
 npm start
 ```
 
-6. Start the frontend development server:
+4. Start the frontend development server:
 ```bash
 cd ../frontend
 npm start
 ```
 
-7. Install and run Ollama with Gemma2:2b:
+5. Install and run Ollama with Gemma2:2b:
 
    **Terminal 1**:
    ```bash
