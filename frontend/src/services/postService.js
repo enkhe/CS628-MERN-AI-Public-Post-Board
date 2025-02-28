@@ -31,3 +31,13 @@ export const createPost = async (post) => {
     throw error;
   }
 };
+
+export const createPostAI = async (post) => {
+  try {
+    const response = await axios.post(API_URL, post);
+    return response.data;
+  } catch (error) {
+    console.error('Error creating post:', error);
+    throw error;
+  }
+};
