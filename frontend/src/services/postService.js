@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const API_URL = process.env.REACT_APP_API_URL;
+const GEMMA_API_URL = process.env.GEMMA_API_URL;
 
 export const getPostList = async () => {
   try {
@@ -32,12 +33,12 @@ export const createPost = async (post) => {
   }
 };
 
-export const createPostAI = async (post) => {
+export const createPostAI = async (input) => {
   try {
-    const response = await axios.post(API_URL, post);
+    const response = await axios.post(GEMMA_API_URL, { input });
     return response.data;
   } catch (error) {
-    console.error('Error creating post:', error);
+    console.error('Error creating post using AI:', error);
     throw error;
   }
 };

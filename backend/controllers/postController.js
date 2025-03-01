@@ -1,9 +1,10 @@
-const Post = require('../models/Post'); // Import MongoDB model
+const Post = require('../models/Post'); 
+const aiService = require('../services/aiService'); 
 
 // (GET /api/posts)
 exports.getPosts = async (req, res) => {
     try {
-        const posts = await Post.find(); // view every posts from MongoDB
+        const posts = await Post.find(); 
         res.json(posts);
     } catch (error) {
         res.status(500).json({ error: 'Server Error' });
@@ -13,7 +14,7 @@ exports.getPosts = async (req, res) => {
 // (GET /api/posts/:id)
 exports.getPostById = async (req, res) => {
     try {
-        const post = await Post.findById(req.params.id); // view certain post by ID from MongoDB
+        const post = await Post.findById(req.params.id); 
         if (post) {
             res.json(post);
         } else {
@@ -41,9 +42,20 @@ exports.createPost = async (req, res) => {
             contact
         });
 
-        await newPost.save(); // Save in MongoDB
+        await newPost.save(); 
         res.status(201).json(newPost);
     } catch (error) {
         res.status(500).json({ error: 'Post Failure' });
+    }
+};
+
+// (POST /api/posts/createAI)
+exports.createPostAI = async (req, res) => {
+    try {
+        const userInput = req.body.input;
+        const aiResponse = await aiService.getAIResponse(userInput);
+        res.status(200).json({ success: true, aiResponse });
+    } catch (error) {
+        res.status(500).json({ success: false, message: 'Error occured on AI processing' });
     }
 };

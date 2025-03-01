@@ -1,34 +1,46 @@
 import { Box, Button, TextField } from '@mui/material';
 import React, { useState } from 'react';
-import { createPostAI } from '../services/postService';
+import { createPostAI, createPost } from '../services/postService';
 
 function CreatePostAI() {
   const [title, setTitle] = useState('');
-  const [details, setDetails] = useState('');
+  const [content, setContent] = useState('');
   const [images, setImages] = useState('');
   const [contact, setContact] = useState('');
+  const [aiResponse, setAiResponse] = useState('');
 
-  const handleSubmit = async (event) => {
+  const handleSubmitToAI = async (event) => {
+    event.preventDefault();
+    try {
+      const prompt = `Title: ${title}\nContent: ${content}`;
+      const response = await createPostAI(prompt);
+      setAiResponse(response.aiResponse);
+    } catch (error) {
+      console.error('Failed to get AI response:', error);
+      alert('Failed to get AI response.');
+    }
+  };
+
+  const handleCreatePost = async (event) => {
     event.preventDefault();
     const newPost = {
       title,
-      content: details,
+      content: aiResponse || content, // Use either AI Response or original content
       images: images.split(',').map(img => img.trim()),
-      contact
+      contact,
     };
     try {
-      await createPostAI(newPost);
+      await createPost(newPost);
       alert('Post created successfully!');
       setTitle('');
-      setDetails('');
+      setContent('');
       setImages('');
       setContact('');
-    
+      setAiResponse('');
     } catch (error) {
       console.error('Failed to create post:', error);
       alert('Failed to create post.');
     }
-
   };
 
   return (
@@ -49,7 +61,7 @@ function CreatePostAI() {
           width: "50%",
           textAlign: "left"
         }}>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmitToAI}>
             <TextField
               label="Title"
               variant="outlined"
@@ -59,15 +71,20 @@ function CreatePostAI() {
               onChange={(e) => setTitle(e.target.value)}
             />
             <TextField
-              label="Details of the post"
+              label="Content"
               variant="outlined"
               fullWidth
               multiline
               rows={4}
               margin="normal"
-              value={details}
-              onChange={(e) => setDetails(e.target.value)}
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
             />
+            <Button type="submit" variant="contained" color="primary" fullWidth sx={{ mt: 2 }}>
+              Ask to AI
+            </Button>
+          </form>
+          <form onSubmit={handleCreatePost}>
             <TextField
               label="Images (comma separated URLs)"
               variant="outlined"
@@ -76,7 +93,6 @@ function CreatePostAI() {
               value={images}
               onChange={(e) => setImages(e.target.value)}
             />
-            
             <TextField
               label="Contact Information"
               variant="outlined"
@@ -85,12 +101,18 @@ function CreatePostAI() {
               value={contact}
               onChange={(e) => setContact(e.target.value)}
             />
-            <Button type="submit" variant="contained" color="primary" fullWidth >
+            <Button type="submit" variant="contained" color="primary" fullWidth>
               Create Post
             </Button>
           </form>
         </Box>
       </Box>
+      {aiResponse && (
+        <Box sx={{ mt: 4 }}>
+          <h2>AI Response:</h2>
+          <p>{aiResponse}</p>
+        </Box>
+      )}
     </div>
   );
 }
