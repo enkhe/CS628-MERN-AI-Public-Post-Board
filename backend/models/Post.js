@@ -8,7 +8,7 @@ const postSchema = new mongoose.Schema({
     images: {type: [String], required: true},
     contact: { type: String, required: true },
 });
-
+postSchema.index({ title: "text", content: "text" });
 // Model Generation
 const Post = mongoose.model('Post', postSchema);
 

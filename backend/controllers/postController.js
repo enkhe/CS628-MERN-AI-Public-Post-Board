@@ -3,9 +3,19 @@ const aiService = require('../services/aiService');
 
 // (GET /api/posts)
 exports.getPosts = async (req, res) => {
+    const {searchKeyword}=req.query
+
     try {
+        if (searchKeyword){
+
+            const posts=await Post.find({
+                $text:{$search:searchKeyword}
+            })
+            res.json(posts);
+        }
+        else {
         const posts = await Post.find(); 
-        res.json(posts);
+        res.json(posts);}
     } catch (error) {
         res.status(500).json({ error: 'Server Error' });
     }

@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState, useCallback } from 'react';
 import PostAddIcon from '@mui/icons-material/PostAdd';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -15,19 +15,19 @@ const NUMBERPOST = 15;
 function Homepage() {
   const { state, dispatch } = useContext(PostContext);
   const { posts } = state;
-
+  
+  const fetchPostList = useCallback(async (keyword) => {
+    try {
+      const data = await getPostList(keyword);
+      dispatch({ type: 'SET_POSTS', payload: data });
+    } catch (error) {
+      console.error('Failed to fetch post list:', error);
+    }
+  },[dispatch])
   useEffect(() => {
-    const fetchPostList = async () => {
-      try {
-        const data = await getPostList();
-        dispatch({ type: 'SET_POSTS', payload: data });
-      } catch (error) {
-        console.error('Failed to fetch post list:', error);
-      }
-    };
 
     fetchPostList();
-  }, [dispatch]);
+  }, [fetchPostList]);
 
   return (
     <div>
@@ -39,7 +39,7 @@ function Homepage() {
         justifyContent: "space-between"
       }}>
         <Box sx={{ width: "100px" }} />
-        <SearchField />
+        <SearchField fetchPostList={fetchPostList} />
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
           <NavLink to="/createpost" style={{ textDecoration: "none" }}>
             <Button variant="contained" endIcon={<PostAddIcon />} size="large" sx={{ mb: 1 }}>

@@ -30,10 +30,10 @@ function Header() {
  
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{ backgroundColor:"#7b1113" ,height: "180px" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          
           <Typography
             variant="h6"
             noWrap
@@ -43,10 +43,11 @@ function Header() {
               mr: 2,
               display: { xs: 'none', md: 'flex' },
               fontFamily: 'monospace',
-              fontWeight: 700,
+              fontWeight: 900,
               letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
+              fontSize:'100px'
             }}
           >
             FEYN
@@ -86,7 +87,7 @@ function Header() {
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          
           <Typography
             variant="h5"
             noWrap
@@ -105,12 +106,12 @@ function Header() {
           >
             FEYN
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', }, justifyContent:'center'}}>
             {pages.map((page) => (
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block', cursor:"default" }}
+                sx={{ my: 2, color: 'white', display: 'block', cursor:"default", fontSize:'70px', fontFamily:'Gabriola', textTransform: "none"}}
               >
                 {page}
               </Button>

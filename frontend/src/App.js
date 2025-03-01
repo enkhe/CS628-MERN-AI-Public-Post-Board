@@ -12,7 +12,7 @@ function App() {
   return (
     <PostProvider>
       <Router>
-        <div className="App">
+        <div className="App" >
           <Header />
           <div>
             <Routes>
