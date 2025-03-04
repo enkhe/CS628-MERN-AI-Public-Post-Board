@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import ImageSlide from './ImageSlide';
 import { getPostDetail } from '../services/postService';
 import { formatDate } from '../utils';
+import { Typography } from '@mui/material';
 
 function PostDetail() {
   const { id } = useParams();
@@ -43,7 +44,12 @@ function PostDetail() {
         <h1>{postDetail.title}</h1>
         <h5>{formatDate(postDetail.createdAt)}</h5>
         <div>
-          <p>{postDetail.content}</p>
+        <Typography
+            variant="body1"
+            sx={{ fontSize: "1.1rem", lineHeight: "1.5", marginBottom: "20px", whiteSpace: "pre-line" }}
+          >
+            {postDetail.content}
+          </Typography>
         </div>
         <h3>Contact information: {postDetail.contact}</h3>
       </Box>

@@ -15,6 +15,10 @@ const NUMBERPOST = 15;
 function Homepage() {
   const { state, dispatch } = useContext(PostContext);
   const { posts } = state;
+  const [currentPage,setCurrentPage]=useState(1)
+  const handlePageChange=(_,value)=>{
+      setCurrentPage(value)
+  }
   
   const fetchPostList = useCallback(async (keyword) => {
     try {
@@ -63,7 +67,7 @@ function Homepage() {
           mr: "auto"
         }}
       >
-        {posts.slice(0, NUMBERPOST).map((item) => (
+        {postsQ.slice((currentPage-1)*NUMBERPOST,currentPage*NUMBERPOST).map((item) => (
           <Grid
             item
             size={2.4}  // 12 ÷ 5 = 2.4 to get exactly 5 items per row
@@ -93,7 +97,7 @@ function Homepage() {
         ))}
       </Grid>
       <Box display="flex" justifyContent="center" alignItems="center" marginTop={2} marginBottom={10}>
-        <Pagination count={Math.ceil(posts.length / NUMBERPOST)} color="primary" />
+        <Pagination count={Math.ceil(posts.length / NUMBERPOST)} color="primary" onChange={handlePageChange} />
       </Box>
     </div>
   );
