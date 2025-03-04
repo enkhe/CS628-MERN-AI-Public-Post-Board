@@ -13,6 +13,7 @@ function PostDetail() {
     const fetchPostDetail = async () => {
       try {
         const data = await getPostDetail(id);
+        console.log('Fetched post detail:', data); // Debugging statement
         setPostDetail(data);
       } catch (error) {
         console.error('Failed to fetch post detail:', error);

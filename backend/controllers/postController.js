@@ -69,3 +69,17 @@ exports.createPostAI = async (req, res) => {
         res.status(500).json({ success: false, message: 'Error occured on AI processing' });
     }
 };
+
+// (DELETE /api/posts/:id)
+exports.deletePostById = async (req, res) => {
+    try {
+        const post = await Post.findByIdAndDelete(req.params.id);
+        if (post) {
+            res.json({ success: true, message: 'Post deleted successfully' });
+        } else {
+            res.status(404).json({ success: false, message: 'Post not found' });
+        }
+    } catch (error) {
+        res.status(500).json({ success: false, message: 'Server Error' });
+    }
+};
