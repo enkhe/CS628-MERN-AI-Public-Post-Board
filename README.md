@@ -7,6 +7,7 @@ Winter 2025 - CS628 Team Project
 - [Features](#features)
 - [Technologies Used](#technologies-used)
 - [Installation](#installation)
+- [Setup AI](#setup-ai)
 - [Usage](#usage)
 - [API Endpoints](#api-endpoints)
 - [Project Structure](#project-structure)
@@ -74,12 +75,12 @@ These technologies and hooks are used throughout the application to create a res
 To run this project locally, follow these steps:
 
 1. Clone the repository:
-   ```bash
+   ```sh
    git clone https://github.com/your-username/CS628-MERN-AI-Public-Post-Board.git
    cd CS628-MERN-AI-Public-Post-Board
    ```
 2. Install dependencies for both frontend and backend:
-```bash
+```sh
 # Install backend dependencies
 cd backend
 npm install
@@ -92,34 +93,37 @@ npm install cross-env
 ```
 
 3. Start the backend server:
-```bash
+```sh
 cd backend
 npm start
 ```
 
 4. Start the frontend development server:
-```bash
+```sh
 cd ../frontend
 npm start
 ```
 
+## Setup AI
 5. Install and run Ollama with Gemma2:2b:
 
    **Terminal 1**:
-   ```bash
-   # Pull Ollama
-   curl -fsSL https://ollama.com/install.sh | sh
-
-   # Run Ollama
-   ollama serve
-   ```
+   ### Pull Ollama
+    ```sh
+    curl -fsSL https://ollama.com/install.sh | sh
+    ```
+    ### Run Ollama
+    ```sh
+    ollama serve
+    ```
 
    **Terminal 2**:
-   ```bash
-   # Pull Gemma2:2b
+   ### Pull Gemma2:2b
+    ```sh
     ollama pull gemma2:2b
-
-    # Run Gemma2:2b
+    ```
+    ### Run Gemma2:2b
+    ```sh
     ollama run gemma2:2b
    ```
 
