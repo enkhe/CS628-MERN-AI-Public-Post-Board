@@ -79,6 +79,13 @@ web_modules/
 # .env.production.local
 # .env.local
 
+# Ignore .env files in the backend and frontend directories
+/backend/.env
+/frontend/.env
+
+# Ignore all .env files in any subdirectory
+**/.env
+
 # parcel-bundler cache (https://parceljs.org/)
 .cache
 .parcel-cache

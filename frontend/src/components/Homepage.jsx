@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import SearchField from './SearchField';
 import PostCard from './PostCard';
-import Grid from '@mui/material/Grid2';
+import Grid from '@mui/material/Grid';
 import Pagination from '@mui/material/Pagination';
 import { NavLink } from 'react-router-dom';
 import { getPostList } from '../services/postService';
@@ -15,11 +15,12 @@ const NUMBERPOST = 15;
 function Homepage() {
   const { state, dispatch } = useContext(PostContext);
   const { posts } = state;
-  const [currentPage,setCurrentPage]=useState(1)
-  const handlePageChange=(_,value)=>{
-      setCurrentPage(value)
-  }
-  
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const handlePageChange = (_, value) => {
+    setCurrentPage(value);
+  };
+
   const fetchPostList = useCallback(async (keyword) => {
     try {
       const data = await getPostList(keyword);
@@ -27,11 +28,14 @@ function Homepage() {
     } catch (error) {
       console.error('Failed to fetch post list:', error);
     }
-  },[dispatch])
-  useEffect(() => {
+  }, [dispatch]);
 
+  useEffect(() => {
     fetchPostList();
   }, [fetchPostList]);
+
+  // Sort posts by creation date in descending order
+  const sortedPosts = [...posts].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
   return (
     <div>
@@ -67,10 +71,10 @@ function Homepage() {
           mr: "auto"
         }}
       >
-        {postsQ.slice((currentPage-1)*NUMBERPOST,currentPage*NUMBERPOST).map((item) => (
+        {sortedPosts.slice((currentPage - 1) * NUMBERPOST, currentPage * NUMBERPOST).map((item) => (
           <Grid
             item
-            size={2.4}  // 12 ÷ 5 = 2.4 to get exactly 5 items per row
+            xs={12} sm={6} md={4} lg={3} xl={2.4}  // Responsive breakpoints
             key={item._id}
           >
             <NavLink to={`/postdetail/${item._id}`} style={{ textDecoration: "none" }}>
@@ -82,7 +86,8 @@ function Homepage() {
                   '&:hover': {
                     boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
                     borderColor: '#bdbdbd'
-                  }
+                  },
+                  height: '100%'  // Ensure the box takes full height
                 }}
               >
                 <PostCard
