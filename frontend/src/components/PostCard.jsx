@@ -10,7 +10,7 @@ function PostCard({ image, title, createdAt, content }) {
     <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
       <CardMedia
         component="img"
-        height="140"
+        height="200"
         image={image}
         alt={title}
       />

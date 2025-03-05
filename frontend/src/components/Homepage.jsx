@@ -49,11 +49,6 @@ function Homepage() {
         <Box sx={{ width: "100px" }} />
         <SearchField fetchPostList={fetchPostList} />
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
-          <NavLink to="/createpost" style={{ textDecoration: "none" }}>
-            <Button variant="contained" endIcon={<PostAddIcon />} size="large" sx={{ mb: 1 }}>
-              Make Post
-            </Button>
-          </NavLink>
           <NavLink to="/createpostAI" style={{ textDecoration: "none" }}>
             <Button variant="contained" endIcon={<PostAddIcon />} size="large">
               Make Post with AI Assistant
