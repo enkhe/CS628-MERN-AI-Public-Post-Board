@@ -1,0 +1,35 @@
+flowchart TD
+    %% Styling
+    classDef server fill:#68a063,stroke:#2e5e1f,stroke-width:1px
+    classDef route fill:#e6f7ff,stroke:#1890ff,stroke-width:1px
+    classDef controller fill:#f6ffed,stroke:#52c41a,stroke-width:1px
+    classDef model fill:#fff7e6,stroke:#fa8c16,stroke-width:1px
+    classDef database fill:#13aa52,stroke:#0d7035,stroke-width:1px
+    classDef ai fill:#ff6f00,stroke:#c43e00,stroke-width:1px
+    classDef storage fill:#0078d4,stroke:#004578,stroke-width:1px
+
+    %% Main Components
+    A[API]:::server -->|"Initializes"| B[Node Express App]:::server
+    A -->|"Connects"| C[(MongoDB)]:::database
+    
+    %% Express Configuration
+    B --> E[Routes]:::route
+    
+    %% Routes Structure
+    E --> E1[Post Routes]:::route
+    E --> E2[Image Routes]:::route
+    E --> E3[AI Routes]:::route
+    
+    %% Controllers
+    E1 --> F1[Post Controller]:::controller
+    E2 --> F2[Image Controller]:::controller
+    E3 --> F3[AI Controller]:::controller
+    
+    %% Updated flow as specified
+    F1 -->|"CRUD Operations"| C
+    F2 -->|"Uploads"| I[Azure Storage]:::storage
+    F3 --> H[Ollama/Gemma2:2b]:::ai
+    
+    %% Return Flows
+    H -.->|"AI Responses"| F3
+    I -.->|"Image URLs"| F2

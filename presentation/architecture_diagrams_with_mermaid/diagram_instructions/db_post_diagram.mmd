@@ -1,0 +1,10 @@
+classDiagram
+    class Post {
+        +String _id
+        +String title
+        +String content
+        +Date createdAt
+        +String[] images
+        +String contact
+    }
+    note for Post "An index is created on [title, content] for text search"

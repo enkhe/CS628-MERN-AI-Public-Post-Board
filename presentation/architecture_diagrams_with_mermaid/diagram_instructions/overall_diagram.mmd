@@ -1,0 +1,61 @@
+flowchart LR
+    %% === Styles with much larger text for all elements ===
+    classDef process fill:#A1D9F7,stroke:#333,stroke-width:3px,font-size:20px;
+    classDef rounded fill:#D4EDDA,stroke:#28A745,stroke-width:3px,font-size:20px;
+    classDef hex fill:#FFC107,stroke:#FF851B,stroke-width:3px,font-size:20px;
+    classDef cyl fill:#BFD5EA,stroke:#17A2B8,stroke-width:3px,font-size:20px;
+    classDef st-rect fill:#F9EBEA,stroke:#E74C3C,stroke-width:3px,font-size:20px;
+    %% Flow labels with larger font
+    linkStyle default font-size:24px;
+    
+    %% === Subgraph: Client Side ===
+    subgraph CLIENT["<span style='font-size:24px;'>Client Side</span>"]
+        direction TB
+        A1["Components & UI"]:::rounded --> A2
+        A2((React Hooks)):::process
+        A3[[AI Post Service]]:::st-rect
+        A4[[Image Post Service]]:::st-rect
+    end
+    
+    %% === Subgraph: Server Side ===
+    subgraph SERVER["<span style='font-size:24px;'>Server Side</span>"]
+        direction TB
+        B4{{Controllers}}:::hex --> B3
+        B3(["API Routes"]):::rounded --> B2
+        B2((Express Framework)):::cyl --> B1
+        B1["Node.js Runtime"]:::process
+    end
+    
+    %% === Subgraph: Database ===
+    subgraph DB["<span style='font-size:24px;'>Database</span>"]
+        C1[(MongoDB Engine)]:::cyl
+        C2((Data Persistence Layer)):::cyl
+    end
+    
+    %% === Subgraph: AI Module ===
+    subgraph AI["<span style='font-size:24px;'>AI Module</span>"]
+        D1["Ollama"]:::cyl --> D2
+        D2["Gemma2:2b LLM"]:::st-rect --> D3
+        D3{{Inference Engine}}:::st-rect
+    end
+    
+    %% === Subgraph: Azure Blob Storage ===
+    subgraph AZURE["<span style='font-size:24px;'>Azure Blob Storage</span>"]
+        E1[(Image Storage)]:::cyl
+    end
+    
+    %% Apply individual styles to each subgraph
+    class CLIENT clientTitle;
+    class SERVER serverTitle;
+    class DB dbTitle;
+    class AI aiTitle;
+    class AZURE azureTitle;
+
+    %% === Flow Arrows with larger font ===
+    CLIENT --o|API Request/Response| SERVER
+    SERVER ---|Query| DB
+    SERVER ---|Prompt Request| AI
+    AI ---|Response Stream| SERVER
+    CLIENT ---|Image Requests| AZURE
+
+    

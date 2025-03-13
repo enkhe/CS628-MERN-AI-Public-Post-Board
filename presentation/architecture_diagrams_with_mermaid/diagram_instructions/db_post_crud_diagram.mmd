@@ -1,0 +1,40 @@
+sequenceDiagram
+    participant User
+    participant postController as Post Controller
+    participant DB as MongoDB
+    participant aiService as AI Service
+
+    %% === GET /api/posts ===
+    User->>postController: GET /api/posts?searchKeyword
+    alt searchKeyword provided
+        postController->>DB: Post.find({ $text: {$search: searchKeyword} })
+    else no searchKeyword
+        postController->>DB: Post.find()
+    end
+    postController-->>User: JSON list of posts or error
+
+    %% === GET /api/posts/:id ===
+    User->>postController: GET /api/posts/:id
+    postController->>DB: Post.findById(id)
+    postController-->>User: Single post or 404 error
+
+    %% === POST /api/posts ===
+    User->>postController: POST /api/posts (title, content, images, contact)
+    postController->>postController: Validate fields
+    postController->>DB: new Post(...).save()
+    postController-->>User: Created post or error
+
+    %% === POST /api/posts/createAI ===
+    User->>postController: POST /api/posts/createAI (input)
+    postController->>aiService: getAIResponse(userInput)
+    aiService-->>postController: AI-generated data
+    postController-->>User: AI response or error
+    
+    %% === DELETE /api/posts/:id ===
+    User->>postController: DELETE /api/posts/:id
+    postController->>DB: Post.findByIdAndDelete(id)
+    alt Post found
+        postController-->>User: success message
+    else Post not found
+        postController-->>User: 404 error
+    end
