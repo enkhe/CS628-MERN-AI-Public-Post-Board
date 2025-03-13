@@ -11,3 +11,9 @@ This directory includes a Python script (`create_diagrams_mermaid.py`) that conv
    Install the Mermaid CLI globally via npm:
    ```bash
    npm install -g @mermaid-js/mermaid-cli
+   ```
+3. **Run App**
+    Run the app by:
+   ```bash
+   python create_diagrams_mermaid.py 
+   ```
